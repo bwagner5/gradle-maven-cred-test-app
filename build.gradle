@@ -6,11 +6,19 @@
  * user guide available at https://docs.gradle.org/3.3/userguide/tutorial_java_projects.html
  */
 
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath 'com.amazonaws:aws-java-sdk:1.11.28'
+    }
+}
 
 // Apply the java plugin to add support for Java
 apply plugin: 'java'
 apply plugin: 'application'
-
+apply plugin: 'maven-publish'
 
 mainClassName = "com.tripletech.DemoApplication"
 
@@ -19,6 +27,27 @@ repositories {
     // Use 'jcenter' for resolving your dependencies.
     // You can declare any Maven/Ivy/file repository here.
     jcenter()
+}
+
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            groupId 'com.tripletech.test'
+            artifactId 'tti-test'
+            version '0.1'
+            from components.java
+        }
+    }
+    repositories {
+        maven {
+            url "s3://tti-1705-artifacts/releases"
+            credentials(AwsCredentials) {
+                def defaultCredentials = new com.amazonaws.auth.DefaultAWSCredentialsProviderChain().getCredentials()
+                accessKey defaultCredentials.getAWSAccessKeyId()
+                secretKey defaultCredentials.getAWSSecretKey()
+            }
+        }
+    }
 }
 
 // In this section you declare the dependencies for your production and test code
