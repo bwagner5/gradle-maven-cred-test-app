@@ -60,7 +60,7 @@ publishing {
 		com.amazonaws.auth.AWSCredentials defaultCredentials = fetchAwsCredentials()          
 		accessKey defaultCredentials.getAWSAccessKeyId()
                 secretKey defaultCredentials.getAWSSecretKey()
-		securityToken defaultCredentials.getAWSSecurityToken()
+		securityToken defaultCredentials.getSessionToken()
             }
         }
     }
