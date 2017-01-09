@@ -42,7 +42,7 @@ publishing {
         maven {
             url "s3://tti-1705-artifacts/releases"
             credentials(AwsCredentials) {
-                def defaultCredentials = new com.amazonaws.auth.DefaultAWSCredentialsProviderChain().getCredentials()
+                def defaultCredentials = com.amazonaws.auth.InstanceProfileCredentialsProvider.getInstance().getCredentials()
                 accessKey defaultCredentials.getAWSAccessKeyId()
                 secretKey defaultCredentials.getAWSSecretKey()
             }
