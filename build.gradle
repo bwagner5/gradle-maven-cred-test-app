@@ -44,7 +44,8 @@ publishing {
             credentials(AwsCredentials) {
                 def defaultCredentials = com.amazonaws.auth.InstanceProfileCredentialsProvider.getInstance().getCredentials()
                 println defaultCredentials.getAWSAccessKeyId()
-                accessKey defaultCredentials.getAWSAccessKeyId()
+                println defaultCredentials.getAWSSecretKey()
+		accessKey defaultCredentials.getAWSAccessKeyId()
                 secretKey defaultCredentials.getAWSSecretKey()
             }
         }
