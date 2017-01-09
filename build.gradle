@@ -43,6 +43,7 @@ publishing {
             url "s3://tti-1705-artifacts/releases"
             credentials(AwsCredentials) {
                 def defaultCredentials = com.amazonaws.auth.InstanceProfileCredentialsProvider.getInstance().getCredentials()
+                println defaultCredentials.getAWSAccessKeyId()
                 accessKey defaultCredentials.getAWSAccessKeyId()
                 secretKey defaultCredentials.getAWSSecretKey()
             }
